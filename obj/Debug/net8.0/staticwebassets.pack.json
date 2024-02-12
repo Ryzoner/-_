@@ -1,0 +1,41 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\vadmi\\RiderProjects\\SKIV\\SKIV\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\SKIV.bundle.scp.css",
+      "PackagePath": "staticwebassets\\SKIV.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\vadmi\\RiderProjects\\SKIV\\SKIV\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\vadmi\\RiderProjects\\SKIV\\SKIV\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\vadmi\\RiderProjects\\SKIV\\SKIV\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\vadmi\\RiderProjects\\SKIV\\SKIV\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.SKIV.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.SKIV.props",
+      "PackagePath": "build\\SKIV.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.SKIV.props",
+      "PackagePath": "buildMultiTargeting\\SKIV.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.SKIV.props",
+      "PackagePath": "buildTransitive\\SKIV.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

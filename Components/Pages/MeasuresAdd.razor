@@ -1,6 +1,101 @@
 ﻿@page "/MeasuresAdd"
-<h3>MeasuresAdd</h3>
+@using SKIV.Components.Models
+@using SKIV.Components.Service
+@inject IMeasureService MeasureService
+
+@if (_saved)
+{
+    <p>Событие успешно добавлено!</p>
+}
+
+@if (_errorMessage != null)
+{
+    <p>Произошла ошибка при добавлении события: @_errorMessage</p>
+}
+
+<form>
+    <div class="form-group">
+        <label>Название события:</label>
+        <input type="text" class="form-control" @bind="_newMeasure.MeasureName" />
+    </div>
+    <div class="form-group">
+        <label>Организатор:</label>
+        <input type="text" class="form-control" @bind="_newMeasure.Organizer" />
+    </div>
+    <div class="form-group">
+        <label>Дата начала:</label>
+        <input type="date" class="form-control" @bind="_newMeasure.StartDate" />
+    </div>
+    <div class="form-group">
+        <label>Дата окончания:</label>
+        <input type="date" class="form-control" @bind="_newMeasure.EndDate" />
+    </div>
+    <div class="form-group">
+        <label>Время:</label>
+        <input type="time" class="form-control" @bind="_newMeasure.Time" />
+    </div>
+    <div class="form-group">
+        <label>Место:</label>
+        <input type="text" class="form-control" @bind="_newMeasure.Place" />
+    </div>
+    <div class="form-group">
+        <label>Адрес:</label>
+        <input type="text" class="form-control" @bind="_newMeasure.Address" />
+    </div>
+    <div class="form-group">
+        <label>Всего участников:</label>
+        <input type="number" class="form-control" @bind="_newMeasure.TotalParticipants" />
+    </div>
+    <div class="form-group">
+        <label>Имя контактного лица:</label>
+        <input type="text" class="form-control" @bind="_newMeasure.ContactFullName" />
+    </div>
+    <div class="form-group">
+        <label>Телефон контактного лица:</label>
+        <input type="tel" class="form-control" @bind="_newMeasure.ContactPhoneNumber" />
+    </div>
+    <div class="form-group">
+        <label>Email контактного лица:</label>
+        <input type="email" class="form-control" @bind="_newMeasure.ContactEmail" />
+    </div>
+    <div class="form-group">
+        <label>Всего волонтеров:</label>
+        <input type="number" class="form-control" @bind="_newMeasure.TotalVolunteers" />
+    </div>
+    <div class="form-group">
+        <label>Волонтеры с ограничениями:</label>
+        <input type="number" class="form-control" @bind="_newMeasure.VolunteersWithDisabilities" />
+    </div>
+    <div class="form-group">
+        <label>Добро.ру (ссылка на сайт):</label>
+        <input type="url" class="form-control" @bind="_newMeasure.DobroRu" />
+    </div>
+    <div class="form-group">
+        <label>ЛП:</label>
+        <input type="checkbox" class="form-check-input" @bind="_newMeasure.LP" />
+    </div>
+    <div class="form-group">
+        <label>ЛР:</label>
+        <input type="checkbox" class="form-check-input" @bind="_newMeasure.LR" />
+    </div>
+    <button type="submit" class="btn btn-primary" @onclick="AddMeasure">Добавить</button>
+</form>
 
 @code {
-    
+    private Measure _newMeasure = new Measure();
+    private bool _saved = false;
+    private string? _errorMessage = null;
+
+    private async Task AddMeasure()
+    {
+        try
+        {
+            await MeasureService.AddMeasure(_newMeasure);
+            _saved = true;
+        }
+        catch (Exception ex)
+        {
+            _errorMessage = ex.Message;
+        }
+    }
 }

@@ -18,6 +18,7 @@ public class Measure
     public string? ContactEmail { get; set; }
     public int TotalVolunteers { get; set; }
     public int VolunteersWithDisabilities { get; set; }
+    public string DobroRu { get; set; }
     public bool LP { get; set; }
     public bool LR { get; set; }
 }

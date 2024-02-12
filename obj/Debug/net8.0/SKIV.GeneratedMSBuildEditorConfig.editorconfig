@@ -22,8 +22,20 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBcHAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vadmi/RiderProjects/SKIV/SKIV/Components/Pages/Measures.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xNZWFzdXJlcy5yYXpvcg==
+[C:/Users/vadmi/RiderProjects/SKIV/SKIV/Components/Pages/MeasuresAdd.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xNZWFzdXJlc0FkZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vadmi/RiderProjects/SKIV/SKIV/Components/Pages/MeasuresView.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xNZWFzdXJlc1ZpZXcucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vadmi/RiderProjects/SKIV/SKIV/Components/Pages/VolunteerAdd.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xWb2x1bnRlZXJBZGQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vadmi/RiderProjects/SKIV/SKIV/Components/Pages/VolunteersView.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xWb2x1bnRlZXJzVmlldy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/vadmi/RiderProjects/SKIV/SKIV/Components/Routes.razor]

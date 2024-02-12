@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "cwKEvzPYwwy9y0e/my7ouSGZy0+7ldX8VSjKzM4IEx/TgneCsbIm0iiIqx3amqtSUSsrHC9bYMj0oRe8l1rKhQ==",
+  "dgSpecHash": "S8hn1lPXPu2DDSX2XvuVjPtvAW7AwbBNd+ep4j8jYhK/0PknXFM7mQ/2Vvy7K5YKRV+EjUqrBJoPDNQ+f3l6YQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\vadmi\\RiderProjects\\SKIV\\SKIV\\SKIV.csproj",
   "expectedPackageFiles": [
@@ -13,6 +13,7 @@
     "C:\\Users\\vadmi\\.nuget\\packages\\microsoft.codeanalysis.csharp.workspaces\\4.5.0\\microsoft.codeanalysis.csharp.workspaces.4.5.0.nupkg.sha512",
     "C:\\Users\\vadmi\\.nuget\\packages\\microsoft.codeanalysis.workspaces.common\\4.5.0\\microsoft.codeanalysis.workspaces.common.4.5.0.nupkg.sha512",
     "C:\\Users\\vadmi\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
+    "C:\\Users\\vadmi\\.nuget\\packages\\microsoft.data.sqlite\\8.0.1\\microsoft.data.sqlite.8.0.1.nupkg.sha512",
     "C:\\Users\\vadmi\\.nuget\\packages\\microsoft.data.sqlite.core\\8.0.1\\microsoft.data.sqlite.core.8.0.1.nupkg.sha512",
     "C:\\Users\\vadmi\\.nuget\\packages\\microsoft.entityframeworkcore\\8.0.1\\microsoft.entityframeworkcore.8.0.1.nupkg.sha512",
     "C:\\Users\\vadmi\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\8.0.1\\microsoft.entityframeworkcore.abstractions.8.0.1.nupkg.sha512",

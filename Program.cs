@@ -1,12 +1,14 @@
 using SKIV.Components;
 using SKIV.Components.DataBase;
+using SKIV.Components.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorComponents()
-    .AddInteractiveServerComponents();
+builder.Services.AddRazorComponents().AddInteractiveServerComponents();
 builder.Services.AddDbContext<ApplicationContext>();
+builder.Services.AddScoped<IMeasureService, MeasureService>();
+
 
 var app = builder.Build();
 

@@ -5,12 +5,12 @@ namespace SKIV.Components.DataBase;
 
 public class ApplicationContext : DbContext
 {
-    public DbSet<Volunteer> Volunteers { get; set; }
-    public DbSet<Measure> Measures { get; set; }
-    public DbSet<Participation> Participations { get; set; }
+    public DbSet<Volunteer> Volunteers { get; set; } = null!;
+    public DbSet<Measure> Measures { get; set; } = null!;
+    public DbSet<Participation> Participations { get; set; } = null!;
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlite("Data Source = LocalStorage.db");
+        optionsBuilder.UseSqlite("DataSource=LocalStorage.db");
     }
 }

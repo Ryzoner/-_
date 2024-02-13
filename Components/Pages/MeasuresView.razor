@@ -3,84 +3,68 @@
 @using SKIV.Components.Service
 @inject MeasureService MeasureService;
 
-<style>
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    
-    th, td {
-      padding: 8px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
-    }
-    
-    th {
-      background-color: #f2f2f2;
-    }
-    
-    tr:hover {
-      background-color: #f5f5f5;
-    }
-</style>
+<h3>Measures</h3>
 
-<table class="table">
-    <thead>
+@if (_measures.Count == 0)
+{
+    <p>No measures found.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
         <tr>
-            <th>Название мероприятия</th>
-            <th>Организатор</th>
-            <th>Дата начала</th>
-            <th>Дата окончания</th>
-            <th>Время</th>
-            <th>Место</th>
-            <th>Адрес</th>
-            <th>Всего участников</th>
-            <th>Имя контактного лица</th>
-            <th>Телефон контактного лица</th>
-            <th>Email контактного лица</th>
-            <th>Всего волонтеров</th>
-            <th>Волонтеры с ограничениями</th>
-            <th>ЛП</th>
-            <th>ЛР</th>
+            <th>Id</th>
+            <th>Measure Name</th>
+            <th>Organizer</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Time</th>
+            <th>Place</th>
+            <th>Address</th>
+            <th>Total Participants</th>
+            <th>Contact Full Name</th>
+            <th>Contact Phone Number</th>
+            <th>Contact Email</th>
+            <th>Total Volunteers</th>
+            <th>Volunteers With Disabilities</th>
+            <th>DobroRu</th>
+            <th>LP</th>
+            <th>LR</th>
         </tr>
-    </thead>
-    <tbody>
-        @foreach (var measure in _measures!)
-        {
-            <tr>
-                <td>@measure.MeasureName</td>
-                <td>@measure.Organizer</td>
-                <td>@measure.StartDate.ToShortDateString()</td>
-                <td>@(measure.EndDate.HasValue ? measure.EndDate.Value.ToShortDateString() : "Не указана")</td>
-                <td>@(measure.Time.HasValue ? measure.Time.Value.ToShortTimeString() : "Не указано")</td>
-                <td>@measure.Place</td>
-                <td>@measure.Address</td>
-                <td>@measure.TotalParticipants</td>
-                <td>@measure.ContactFullName</td>
-                <td>@(measure.ContactPhoneNumber.HasValue ? measure.ContactPhoneNumber.Value.ToString() : "Не указан")</td>
-                <td>@measure.ContactEmail</td>
-                <td>@measure.TotalVolunteers</td>
-                <td>@measure.VolunteersWithDisabilities</td>
-                <td>@measure.DobroRu</td>
-                <td>@(measure.LP ? "Да" : "Нет")</td>
-                <td>@(measure.LR ? "Да" : "Нет")</td>
-            </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var measure in _measures)
+            {
+                <tr>
+                    <td>@measure.IdMeasure</td>
+                    <td>@measure.MeasureName</td>
+                    <td>@measure.Organizer</td>
+                    <td>@measure.StartDate</td>
+                    <td>@measure.EndDate</td>
+                    <td>@measure.Time</td>
+                    <td>@measure.Place</td>
+                    <td>@measure.Address</td>
+                    <td>@measure.TotalParticipants</td>
+                    <td>@measure.ContactFullName</td>
+                    <td>@(measure.ContactPhoneNumber != null ? measure.ContactPhoneNumber.ToString() : "")</td>
+                    <td>@measure.ContactEmail</td>
+                    <td>@measure.TotalVolunteers</td>
+                    <td>@measure.VolunteersWithDisabilities</td>
+                    <td>@measure.DobroRu</td>
+                    <td>@(measure.LP ? "Yes" : "No")</td>
+                    <td>@(measure.LR ? "Yes" : "No")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
 
 @code {
     private List<Measure> _measures;
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        try
-        {
-            _measures = await MeasureService.GetMeasures();
-        }
-        catch (Exception ex)
-        {
-            // Обработка ошибки
-        }
+        _measures = MeasureService.GetMeasures();
     }
 }

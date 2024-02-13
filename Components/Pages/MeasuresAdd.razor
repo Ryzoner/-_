@@ -1,101 +1,145 @@
 ﻿@page "/MeasuresAdd"
 @using SKIV.Components.Models
 @using SKIV.Components.Service
-@inject IMeasureService MeasureService
+@inject MeasureService MeasureService;
 
-@if (_saved)
-{
-    <p>Событие успешно добавлено!</p>
-}
-
-@if (_errorMessage != null)
-{
-    <p>Произошла ошибка при добавлении события: @_errorMessage</p>
-}
-
+<!--
 <form>
     <div class="form-group">
         <label>Название события:</label>
-        <input type="text" class="form-control" @bind="_newMeasure.MeasureName" />
+        <input type="text" class="form-control" @bind="_measureName"/>
     </div>
     <div class="form-group">
         <label>Организатор:</label>
-        <input type="text" class="form-control" @bind="_newMeasure.Organizer" />
+        <input type="text" class="form-control" @bind="_organizer"/>
     </div>
     <div class="form-group">
         <label>Дата начала:</label>
-        <input type="date" class="form-control" @bind="_newMeasure.StartDate" />
+        <input type="date" class="form-control" @bind="_startDate"/>
     </div>
     <div class="form-group">
         <label>Дата окончания:</label>
-        <input type="date" class="form-control" @bind="_newMeasure.EndDate" />
+        <input type="date" class="form-control" @bind="_endDate"/>
     </div>
     <div class="form-group">
         <label>Время:</label>
-        <input type="time" class="form-control" @bind="_newMeasure.Time" />
+        <input type="time" class="form-control" @bind="_time"/>
     </div>
     <div class="form-group">
         <label>Место:</label>
-        <input type="text" class="form-control" @bind="_newMeasure.Place" />
+        <input type="text" class="form-control" @bind="_place"/>
     </div>
     <div class="form-group">
         <label>Адрес:</label>
-        <input type="text" class="form-control" @bind="_newMeasure.Address" />
+        <input type="text" class="form-control" @bind="_address"/>
     </div>
     <div class="form-group">
         <label>Всего участников:</label>
-        <input type="number" class="form-control" @bind="_newMeasure.TotalParticipants" />
+        <input type="number" class="form-control" @bind="_totalParticipants"/>
     </div>
     <div class="form-group">
         <label>Имя контактного лица:</label>
-        <input type="text" class="form-control" @bind="_newMeasure.ContactFullName" />
+        <input type="text" class="form-control" @bind="_contactFullName"/>
     </div>
     <div class="form-group">
         <label>Телефон контактного лица:</label>
-        <input type="tel" class="form-control" @bind="_newMeasure.ContactPhoneNumber" />
+        <input type="tel" class="form-control" @bind="_contactPhoneNumber"/>
     </div>
     <div class="form-group">
         <label>Email контактного лица:</label>
-        <input type="email" class="form-control" @bind="_newMeasure.ContactEmail" />
+        <input type="email" class="form-control" @bind="_contactEmail"/>
     </div>
     <div class="form-group">
         <label>Всего волонтеров:</label>
-        <input type="number" class="form-control" @bind="_newMeasure.TotalVolunteers" />
+        <input type="number" class="form-control" @bind="_totalVolunteers"/>
     </div>
     <div class="form-group">
         <label>Волонтеры с ограничениями:</label>
-        <input type="number" class="form-control" @bind="_newMeasure.VolunteersWithDisabilities" />
+        <input type="number" class="form-control" @bind="_volunteersWithDisabilities"/>
     </div>
     <div class="form-group">
         <label>Добро.ру (ссылка на сайт):</label>
-        <input type="url" class="form-control" @bind="_newMeasure.DobroRu" />
+        <input type="url" class="form-control" @bind="_dobroRu"/>
     </div>
     <div class="form-group">
         <label>ЛП:</label>
-        <input type="checkbox" class="form-check-input" @bind="_newMeasure.LP" />
+        <input type="checkbox" class="form-check-input" @bind="_lp"/>
     </div>
     <div class="form-group">
         <label>ЛР:</label>
-        <input type="checkbox" class="form-check-input" @bind="_newMeasure.LR" />
+        <input type="checkbox" class="form-check-input" @bind="_lr"/>
     </div>
-    <button type="submit" class="btn btn-primary" @onclick="AddMeasure">Добавить</button>
-</form>
+    </form>
+    -->
+<button class="btn btn-primary" @onclick="Add">Добавить</button>
 
 @code {
-    private Measure _newMeasure = new Measure();
-    private bool _saved = false;
-    private string? _errorMessage = null;
+    /*
+    private string? _measureName;
+    private string? _organizer;
+    private DateTime _startDate;
+    private DateTime _endDate;
+    private DateTime _time;
+    private string? _place;
+    private string? _address;
+    private int _totalParticipants;
+    private string? _contactFullName;
+    private int? _contactPhoneNumber;
+    private string? _contactEmail;
+    private int _totalVolunteers;
+    private int _volunteersWithDisabilities;
+    private string? _dobroRu;
+    private bool _lp;
+    private bool _lr;
 
-    private async Task AddMeasure()
+    private void AddMeasure()
     {
-        try
+        var measure = new Measure()
         {
-            await MeasureService.AddMeasure(_newMeasure);
-            _saved = true;
-        }
-        catch (Exception ex)
-        {
-            _errorMessage = ex.Message;
-        }
+            MeasureName = _measureName,
+            Organizer = _organizer,
+            StartDate = _startDate,
+            EndDate = _endDate,
+            Time = _time,
+            Place = _place,
+            Address = _address,
+            TotalParticipants = _totalParticipants,
+            ContactFullName = _contactFullName,
+            ContactPhoneNumber = _contactPhoneNumber,
+            ContactEmail = _contactEmail,
+            TotalVolunteers = _totalVolunteers,
+            VolunteersWithDisabilities = _volunteersWithDisabilities,
+            DobroRu = _dobroRu,
+            LP = _lp,
+            LR = _lr
+        };
+        Ef.Add(measure);
+        Ef.SaveChanges();
     }
+    */
+    
+    private void Add()
+    {
+        var measure = new Measure()
+        {
+            MeasureName = "Название мероприятия",
+            Organizer = "Организатор",
+            StartDate = "24.08.2022", // Пример даты начала мероприятия
+            EndDate = "25.08.2022", // Пример: мероприятие еще не завершено
+            Time = "11:45", // Пример времени начала мероприятия
+            Place = "Место проведения",
+            Address = "Адрес",
+            TotalParticipants = 100, // Пример: ожидаемое количество участников
+            ContactFullName = "Контактное лицо",
+            ContactPhoneNumber = 123456789, // Пример: номер телефона
+            ContactEmail = "example@example.com",
+            TotalVolunteers = 50, // Пример: ожидаемое количество волонтеров
+            VolunteersWithDisabilities = 5, // Пример: количество волонтеров с ограничениями
+            DobroRu = "https://example.com", // Пример ссылки на Dobro.ru
+            LP = true, // Пример: наличие ЛП
+            LR = false // Пример: отсутствие ЛР
+        };
+        MeasureService.AddMeasure(measure);
+    }
+
 }

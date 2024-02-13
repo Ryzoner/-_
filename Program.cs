@@ -6,8 +6,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents().AddInteractiveServerComponents();
+builder.Services.AddScoped<MeasureService>();
 builder.Services.AddDbContext<ApplicationContext>();
-builder.Services.AddScoped<IMeasureService, MeasureService>();
+
 
 
 var app = builder.Build();

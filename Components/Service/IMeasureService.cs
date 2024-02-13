@@ -4,6 +4,6 @@ namespace SKIV.Components.Service;
 
 public interface IMeasureService
 {
-    Task<List<Measure>> GetMeasures();
-    Task AddMeasure(Measure measure);
+    public List<Measure> GetMeasures();
+    public void AddMeasure(Measure measure);
 }

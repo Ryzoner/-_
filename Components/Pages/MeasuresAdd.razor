@@ -3,7 +3,8 @@
 @using SKIV.Components.Service
 @inject MeasureService MeasureService;
 
-<!--
+@rendermode InteractiveServer
+
 <form>
     <div class="form-group">
         <label>Название события:</label>
@@ -22,8 +23,12 @@
         <input type="date" class="form-control" @bind="_endDate"/>
     </div>
     <div class="form-group">
-        <label>Время:</label>
-        <input type="time" class="form-control" @bind="_time"/>
+        <label>Время начала:</label>
+        <input type="time" class="form-control" @bind="_startTime"/>
+    </div>
+    <div class="form-group">
+        <label>Время конца:</label>
+        <input type="time" class="form-control" @bind="_endTime"/>
     </div>
     <div class="form-group">
         <label>Место:</label>
@@ -69,17 +74,33 @@
         <label>ЛР:</label>
         <input type="checkbox" class="form-check-input" @bind="_lr"/>
     </div>
-    </form>
+    <!--
+    <div class="form-group">
+        <label>Волонтёры:</label>
+        @foreach (var volunteer in Volunteers)
+        {
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" @bind="_selectedVolunteers[@volunteer.Id]" />
+                <label class="form-check-label">@volunteer.Name</label>
+                <input type="number" min="1" max="5" class="form-control" @bind="_volunteerRatings[@volunteer.Id]" />
+            </div>
+        }
+    </div>
     -->
+        </form>
+
 <button class="btn btn-primary" @onclick="Add">Добавить</button>
 
 @code {
-    /*
+    
+    private Dictionary<int, bool> _selectedVolunteers = new Dictionary<int, bool>();
+    private Dictionary<int, int> _volunteerRatings = new Dictionary<int, int>();
     private string? _measureName;
     private string? _organizer;
     private DateTime _startDate;
     private DateTime _endDate;
-    private DateTime _time;
+    private DateTime _startTime;
+    private DateTime _endTime;
     private string? _place;
     private string? _address;
     private int _totalParticipants;
@@ -91,7 +112,7 @@
     private string? _dobroRu;
     private bool _lp;
     private bool _lr;
-
+/*
     private void AddMeasure()
     {
         var measure = new Measure()
@@ -100,7 +121,8 @@
             Organizer = _organizer,
             StartDate = _startDate,
             EndDate = _endDate,
-            Time = _time,
+            StartTime = _startTime,
+            EndTime = _endTime,
             Place = _place,
             Address = _address,
             TotalParticipants = _totalParticipants,
@@ -113,12 +135,24 @@
             LP = _lp,
             LR = _lr
         };
-        Ef.Add(measure);
-        Ef.SaveChanges();
+
+        foreach (var volunteerId in _selectedVolunteers.Keys)
+        {
+            if (_selectedVolunteers[volunteerId])
+            {
+                var rating = _volunteerRatings.GetValueOrDefault(volunteerId, 0);
+                measure.VolunteerRatings.Add(new VolunteerRating)
+                {
+                    VolunteerId = volunteerId,
+                    Score = rating
+                });
+            }
+        }
+        MeasureService.AddMeasure(measure);
     }
     */
-    
-    private void Add()
+        
+private void Add()
     {
         var measure = new Measure()
         {
@@ -126,10 +160,12 @@
             Organizer = "Организатор",
             StartDate = "24.08.2022", // Пример даты начала мероприятия
             EndDate = "25.08.2022", // Пример: мероприятие еще не завершено
-            Time = "11:45", // Пример времени начала мероприятия
+            StartTime = "11:45", // Пример времени начала мероприятия
+            EndTime = "13:00", // Пример: мероприятие завершено
             Place = "Место проведения",
             Address = "Адрес",
             TotalParticipants = 100, // Пример: ожидаемое количество участников
+            ParticipantsWithDosabilities = 10, // Пример: количество участников с ограничениями
             ContactFullName = "Контактное лицо",
             ContactPhoneNumber = 123456789, // Пример: номер телефона
             ContactEmail = "example@example.com",
@@ -137,7 +173,8 @@
             VolunteersWithDisabilities = 5, // Пример: количество волонтеров с ограничениями
             DobroRu = "https://example.com", // Пример ссылки на Dobro.ru
             LP = true, // Пример: наличие ЛП
-            LR = false // Пример: отсутствие ЛР
+            LR = false, // Пример: отсутствие ЛР
+            ThankYouLettersSent = true
         };
         MeasureService.AddMeasure(measure);
     }

@@ -1,6 +1,8 @@
 ﻿@page "/MeasuresView"
 @using SKIV.Components.Models
 @using SKIV.Components.Service
+@using SKIV.Components.DataBase
+@inject ApplicationContext DbContext;
 @inject MeasureService MeasureService;
 
 <h3>Measures</h3>
@@ -19,10 +21,12 @@ else
             <th>Organizer</th>
             <th>Start Date</th>
             <th>End Date</th>
-            <th>Time</th>
+            <th>Start Time</th>
+            <th>End Time</th>
             <th>Place</th>
             <th>Address</th>
             <th>Total Participants</th>
+            <th>Participants With Dosabilities</th>
             <th>Contact Full Name</th>
             <th>Contact Phone Number</th>
             <th>Contact Email</th>
@@ -31,6 +35,7 @@ else
             <th>DobroRu</th>
             <th>LP</th>
             <th>LR</th>
+            <th>Благодарственные письма</th>
         </tr>
         </thead>
         <tbody>
@@ -42,10 +47,12 @@ else
                     <td>@measure.Organizer</td>
                     <td>@measure.StartDate</td>
                     <td>@measure.EndDate</td>
-                    <td>@measure.Time</td>
+                    <td>@measure.StartTime</td>
+                    <td>@measure.EndTime</td>
                     <td>@measure.Place</td>
                     <td>@measure.Address</td>
                     <td>@measure.TotalParticipants</td>
+                    <td>@measure.ParticipantsWithDosabilities</td>
                     <td>@measure.ContactFullName</td>
                     <td>@(measure.ContactPhoneNumber != null ? measure.ContactPhoneNumber.ToString() : "")</td>
                     <td>@measure.ContactEmail</td>
@@ -54,6 +61,12 @@ else
                     <td>@measure.DobroRu</td>
                     <td>@(measure.LP ? "Yes" : "No")</td>
                     <td>@(measure.LR ? "Yes" : "No")</td>
+                    <td>
+                        <select class="form-control" @oninput="(e) => UpdateThankYouLetterSent(measure.IdMeasure, e.Value)">
+                            <option value="true">Да</option>
+                            <option value="false">Нет</option>
+                        </select>
+                    </td>
                 </tr>
             }
         </tbody>
@@ -62,6 +75,17 @@ else
 
 @code {
     private List<Measure> _measures;
+    private Dictionary<int, bool> _thankYouLetterSent = new Dictionary<int, bool>();
+
+    private void UpdateThankYouLetterSent(int measureId, object? value)
+    {
+        var measure = DbContext.Measures.Find(measureId);
+        if (measure != null)
+        {
+            measure.ThankYouLettersSent = (bool)value;
+            DbContext.SaveChanges();
+        }
+    }
 
     protected override void OnInitialized()
     {

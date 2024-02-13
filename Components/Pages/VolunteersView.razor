@@ -1,6 +1,51 @@
 ﻿@page "/VolunteersView"
+@using SKIV.Components.Models
+@using SKIV.Components.Service
+@inject VolunteerService VolunteerService;
 <h3>Volunteer</h3>
 
+@if (_volunteers.Count == 0)
+{
+    <p>No volunteers found.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Имя</th>
+            <th>Отчество</th>
+            <th>Фамилия</th>
+            <th>Дата рождения</th>
+            <th>VK</th>
+            <th>Инвалидность</th>
+            <th>Размер одежды</th>
+            <th>Рейтинг</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var volunteer in _volunteers)
+        {
+            <tr>
+                <td>@volunteer.FirstName</td>
+                <td>@volunteer.MiddleName</td>
+                <td>@volunteer.Patronymic</td>
+                <td>@volunteer.BirthDay</td>
+                <td>@volunteer.VK</td>
+                <td>@(volunteer.Disability ? "Да" : "Нет")</td>
+                <td>@volunteer.ClothingSize</td>
+                <!--<td>@VolunteerService.GetTotalRatingForVolunteer(volunteer.IdVolunteer)</td>-->
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
 @code {
-    
+    private List<Volunteer>? _volunteers { get; set; }
+
+    protected override void OnInitialized()
+    {
+        _volunteers = VolunteerService.GetVolunteers();
+    }
 }

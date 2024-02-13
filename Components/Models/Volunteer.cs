@@ -8,7 +8,7 @@ public class Volunteer
     public string FirstName { get; set; }
     public string MiddleName { get; set; }
     public string? Patronymic { get; set; }
-    public DateTime BirthDay { get; set; }
+    public string BirthDay { get; set; }
     public string? VK { get; set; }
     public bool Disability { get; set; }
     public int ClothingSize { get; set; }

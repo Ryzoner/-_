@@ -38,7 +38,10 @@ namespace SKIV.Migrations
                     b.Property<string>("DobroRu")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime?>("EndDate")
+                    b.Property<string>("EndDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("EndTime")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("LP")
@@ -53,14 +56,20 @@ namespace SKIV.Migrations
                     b.Property<string>("Organizer")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("ParticipantsWithDosabilities")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Place")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("StartDate")
+                    b.Property<string>("StartDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime?>("Time")
+                    b.Property<string>("StartTime")
                         .HasColumnType("TEXT");
+
+                    b.Property<bool>("ThankYouLettersSent")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("TotalParticipants")
                         .HasColumnType("INTEGER");
@@ -82,21 +91,27 @@ namespace SKIV.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Measure")
+                    b.Property<int>("IdMeasure")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Role")
+                    b.Property<int>("IdVolunteer")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("MeasureNameIdMeasure")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Score")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Volunteer")
+                    b.Property<int>("VolunteerNameIdVolunteer")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("IdParticipation");
 
-                    b.HasIndex("Measure");
+                    b.HasIndex("MeasureNameIdMeasure");
 
-                    b.HasIndex("Volunteer");
+                    b.HasIndex("VolunteerNameIdVolunteer");
 
                     b.ToTable("Participations");
                 });
@@ -107,7 +122,8 @@ namespace SKIV.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("BirthDay")
+                    b.Property<string>("BirthDay")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("ClothingSize")
@@ -140,21 +156,26 @@ namespace SKIV.Migrations
 
             modelBuilder.Entity("SKIV.Components.Models.Participation", b =>
                 {
-                    b.HasOne("SKIV.Components.Models.Measure", "IdMeasure")
-                        .WithMany()
-                        .HasForeignKey("Measure")
+                    b.HasOne("SKIV.Components.Models.Measure", "MeasureName")
+                        .WithMany("VolunteerRatings")
+                        .HasForeignKey("MeasureNameIdMeasure")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SKIV.Components.Models.Volunteer", "IdVolunteer")
+                    b.HasOne("SKIV.Components.Models.Volunteer", "VolunteerName")
                         .WithMany()
-                        .HasForeignKey("Volunteer")
+                        .HasForeignKey("VolunteerNameIdVolunteer")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("IdMeasure");
+                    b.Navigation("MeasureName");
 
-                    b.Navigation("IdVolunteer");
+                    b.Navigation("VolunteerName");
+                });
+
+            modelBuilder.Entity("SKIV.Components.Models.Measure", b =>
+                {
+                    b.Navigation("VolunteerRatings");
                 });
 #pragma warning restore 612, 618
         }

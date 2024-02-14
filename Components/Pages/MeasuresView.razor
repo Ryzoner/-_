@@ -2,8 +2,8 @@
 @using SKIV.Components.Models
 @using SKIV.Components.Service
 @using SKIV.Components.DataBase
-@inject ApplicationContext DbContext;
 @inject MeasureService MeasureService;
+@rendermode InteractiveServer
 
 <h3>Measures</h3>
 
@@ -32,10 +32,10 @@ else
             <th>Contact Email</th>
             <th>Total Volunteers</th>
             <th>Volunteers With Disabilities</th>
+            <th>Медиа Волонтеры</th>
             <th>DobroRu</th>
             <th>LP</th>
             <th>LR</th>
-            <th>Благодарственные письма</th>
         </tr>
         </thead>
         <tbody>
@@ -45,28 +45,23 @@ else
                     <td>@measure.IdMeasure</td>
                     <td>@measure.MeasureName</td>
                     <td>@measure.Organizer</td>
-                    <td>@measure.StartDate</td>
-                    <td>@measure.EndDate</td>
+                    <td>@measure.StartDate.ToString("dd/MM/yyyy")</td>
+                    <td>@measure.EndDate.ToString("dd/MM/yyyy")</td>
                     <td>@measure.StartTime</td>
                     <td>@measure.EndTime</td>
                     <td>@measure.Place</td>
                     <td>@measure.Address</td>
                     <td>@measure.TotalParticipants</td>
-                    <td>@measure.ParticipantsWithDosabilities</td>
+                    <td>@measure.ParticipantsWithDisabilities</td>
                     <td>@measure.ContactFullName</td>
                     <td>@(measure.ContactPhoneNumber != null ? measure.ContactPhoneNumber.ToString() : "")</td>
                     <td>@measure.ContactEmail</td>
                     <td>@measure.TotalVolunteers</td>
                     <td>@measure.VolunteersWithDisabilities</td>
+                    <td>@measure.MediaVolunteers</td>
                     <td>@measure.DobroRu</td>
                     <td>@(measure.LP ? "Yes" : "No")</td>
                     <td>@(measure.LR ? "Yes" : "No")</td>
-                    <td>
-                        <select class="form-control" @oninput="(e) => UpdateThankYouLetterSent(measure.IdMeasure, e.Value)">
-                            <option value="true">Да</option>
-                            <option value="false">Нет</option>
-                        </select>
-                    </td>
                 </tr>
             }
         </tbody>
@@ -75,18 +70,7 @@ else
 
 @code {
     private List<Measure> _measures;
-    private Dictionary<int, bool> _thankYouLetterSent = new Dictionary<int, bool>();
-
-    private void UpdateThankYouLetterSent(int measureId, object? value)
-    {
-        var measure = DbContext.Measures.Find(measureId);
-        if (measure != null)
-        {
-            measure.ThankYouLettersSent = (bool)value;
-            DbContext.SaveChanges();
-        }
-    }
-
+    
     protected override void OnInitialized()
     {
         _measures = MeasureService.GetMeasures();

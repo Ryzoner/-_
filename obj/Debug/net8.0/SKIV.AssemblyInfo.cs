@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SKIV")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2933e54ea72a8e58ffb287237d68ef2c6e14a42e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b547beaa8c6407d5a0d1057f2b490f4046579a9b")]
 [assembly: System.Reflection.AssemblyProductAttribute("SKIV")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SKIV")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

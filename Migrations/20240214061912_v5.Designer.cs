@@ -11,8 +11,8 @@ using SKIV.Components.DataBase;
 namespace SKIV.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20240213065419_v2")]
-    partial class v2
+    [Migration("20240214061912_v5")]
+    partial class v5
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,7 +41,10 @@ namespace SKIV.Migrations
                     b.Property<string>("DobroRu")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime?>("EndDate")
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("EndTime")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("LP")
@@ -56,14 +59,20 @@ namespace SKIV.Migrations
                     b.Property<string>("Organizer")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("ParticipantsWithDosabilities")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Place")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime?>("Time")
+                    b.Property<DateTime>("StartTime")
                         .HasColumnType("TEXT");
+
+                    b.Property<bool>("ThankYouLettersSent")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("TotalParticipants")
                         .HasColumnType("INTEGER");
@@ -85,21 +94,20 @@ namespace SKIV.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Measure")
+                    b.Property<int>("MeasureIdMeasureIdMeasure")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("Score")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<int>("Volunteer")
+                    b.Property<int>("VolunteerIdVolunteerIdVolunteer")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("IdParticipation");
 
-                    b.HasIndex("Measure");
+                    b.HasIndex("MeasureIdMeasureIdMeasure");
 
-                    b.HasIndex("Volunteer");
+                    b.HasIndex("VolunteerIdVolunteerIdVolunteer");
 
                     b.ToTable("Participations");
                 });
@@ -110,7 +118,8 @@ namespace SKIV.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("BirthDay")
+                    b.Property<string>("BirthDay")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("ClothingSize")
@@ -143,21 +152,26 @@ namespace SKIV.Migrations
 
             modelBuilder.Entity("SKIV.Components.Models.Participation", b =>
                 {
-                    b.HasOne("SKIV.Components.Models.Measure", "IdMeasure")
-                        .WithMany()
-                        .HasForeignKey("Measure")
+                    b.HasOne("SKIV.Components.Models.Measure", "MeasureIdMeasure")
+                        .WithMany("VolunteerRatings")
+                        .HasForeignKey("MeasureIdMeasureIdMeasure")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SKIV.Components.Models.Volunteer", "IdVolunteer")
+                    b.HasOne("SKIV.Components.Models.Volunteer", "VolunteerIdVolunteer")
                         .WithMany()
-                        .HasForeignKey("Volunteer")
+                        .HasForeignKey("VolunteerIdVolunteerIdVolunteer")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("IdMeasure");
+                    b.Navigation("MeasureIdMeasure");
 
-                    b.Navigation("IdVolunteer");
+                    b.Navigation("VolunteerIdVolunteer");
+                });
+
+            modelBuilder.Entity("SKIV.Components.Models.Measure", b =>
+                {
+                    b.Navigation("VolunteerRatings");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,5 +1,4 @@
-﻿using System.Net;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using SKIV.Components.DataBase;
 using SKIV.Components.Models;
 

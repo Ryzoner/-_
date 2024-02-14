@@ -6,7 +6,7 @@ namespace SKIV.Components.Models;
 public class Participation
 {
     [Key] public int IdParticipation { get; set; }
-    public Volunteer IdVolunteer { get; set; }
-    public Measure IdMeasure { get; set; }
+    public virtual Measure Measure { get; set; }
+    public virtual Volunteer Volunteer { get; set; }
     public int Score { get; set; }
 }

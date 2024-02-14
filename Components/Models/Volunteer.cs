@@ -6,7 +6,7 @@ public class Volunteer
 {
     [Key] public int IdVolunteer { get; set; }
     public string FirstName { get; set; }
-    public string MiddleName { get; set; }
+    public string SurName { get; set; }
     public string? Patronymic { get; set; }
     public string BirthDay { get; set; }
     public string? VK { get; set; }

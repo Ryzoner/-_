@@ -3,6 +3,7 @@
 @using SKIV.Components.Service
 @inject VolunteerService VolunteerService;
 <h3>Volunteer</h3>
+@rendermode InteractiveServer
 
 @if (_volunteers.Count == 0)
 {
@@ -14,8 +15,8 @@ else
         <thead>
         <tr>
             <th>Имя</th>
-            <th>Отчество</th>
             <th>Фамилия</th>
+            <th>Отчество</th>
             <th>Дата рождения</th>
             <th>VK</th>
             <th>Инвалидность</th>
@@ -28,13 +29,13 @@ else
         {
             <tr>
                 <td>@volunteer.FirstName</td>
-                <td>@volunteer.MiddleName</td>
+                <td>@volunteer.SurName</td>
                 <td>@volunteer.Patronymic</td>
                 <td>@volunteer.BirthDay</td>
                 <td>@volunteer.VK</td>
                 <td>@(volunteer.Disability ? "Да" : "Нет")</td>
                 <td>@volunteer.ClothingSize</td>
-                <!--<td>@VolunteerService.GetTotalRatingForVolunteer(volunteer.IdVolunteer)</td>-->
+                <td>@VolunteerService.CalculateTotalRating(volunteer.IdVolunteer)</td>
             </tr>
         }
         </tbody>

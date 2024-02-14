@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents().AddInteractiveServerComponents();
 builder.Services.AddScoped<MeasureService>();
 builder.Services.AddScoped<VolunteerService>();
+builder.Services.AddScoped<ParticipationService>();
 builder.Services.AddDbContext<ApplicationContext>();
 
 

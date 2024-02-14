@@ -38,10 +38,10 @@ namespace SKIV.Migrations
                     b.Property<string>("DobroRu")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("EndDate")
+                    b.Property<DateTime>("EndDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("EndTime")
+                    b.Property<DateTime>("EndTime")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("LP")
@@ -62,10 +62,10 @@ namespace SKIV.Migrations
                     b.Property<string>("Place")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("StartDate")
+                    b.Property<DateTime>("StartDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("StartTime")
+                    b.Property<DateTime>("StartTime")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("ThankYouLettersSent")
@@ -91,27 +91,20 @@ namespace SKIV.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("IdMeasure")
+                    b.Property<int>("MeasureIdMeasureIdMeasure")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("IdVolunteer")
+                    b.Property<int>("Score")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("MeasureNameIdMeasure")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Score")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("VolunteerNameIdVolunteer")
+                    b.Property<int>("VolunteerIdVolunteerIdVolunteer")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("IdParticipation");
 
-                    b.HasIndex("MeasureNameIdMeasure");
+                    b.HasIndex("MeasureIdMeasureIdMeasure");
 
-                    b.HasIndex("VolunteerNameIdVolunteer");
+                    b.HasIndex("VolunteerIdVolunteerIdVolunteer");
 
                     b.ToTable("Participations");
                 });
@@ -156,21 +149,21 @@ namespace SKIV.Migrations
 
             modelBuilder.Entity("SKIV.Components.Models.Participation", b =>
                 {
-                    b.HasOne("SKIV.Components.Models.Measure", "MeasureName")
+                    b.HasOne("SKIV.Components.Models.Measure", "MeasureIdMeasure")
                         .WithMany("VolunteerRatings")
-                        .HasForeignKey("MeasureNameIdMeasure")
+                        .HasForeignKey("MeasureIdMeasureIdMeasure")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SKIV.Components.Models.Volunteer", "VolunteerName")
+                    b.HasOne("SKIV.Components.Models.Volunteer", "VolunteerIdVolunteer")
                         .WithMany()
-                        .HasForeignKey("VolunteerNameIdVolunteer")
+                        .HasForeignKey("VolunteerIdVolunteerIdVolunteer")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("MeasureName");
+                    b.Navigation("MeasureIdMeasure");
 
-                    b.Navigation("VolunteerName");
+                    b.Navigation("VolunteerIdVolunteer");
                 });
 
             modelBuilder.Entity("SKIV.Components.Models.Measure", b =>

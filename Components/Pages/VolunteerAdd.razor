@@ -1,7 +1,66 @@
 ﻿@page "/VolunteerAdd"
+@using SKIV.Components.Models
+@using SKIV.Components.Service
+@inject VolunteerService VolunteerService;
 <h3>VolunteerAdd</h3>
 @rendermode InteractiveServer
 
+<div class="container">
+    <form class="form-container">
+        <div class="form-group">
+            <label>Фамилия волонтера:</label>
+            <input type="text" class="form-control" @bind="_surName"/>
+        </div>
+        <div class="form-group">
+            <label>Имя волонтера:</label>
+            <input type="text" class="form-control" @bind="_firstName"/>
+        </div>
+        <div class="form-group">
+            <label>Отчество волонтера</label>
+            <input type="text" class="form-control" @bind="_partonymic"/>
+        </div>
+        <div class="form-group">
+            <label>Дата рождения:</label>
+            <input type="date" class="form-control" @bind="_birthDay"/>
+        </div>
+        <div class="form-group">
+            <label>Профиль Вконтакте:</label>
+            <input type="text" class="form-control" @bind="_vk"/>
+        </div>
+        <div class="form-group">
+            <label>Размер одежды: </label>
+            <input type="number" class="form-control" @bind="_clothingSize"/>
+        </div>
+                <div class="form-group">
+                    <label>Есть инвалидность:</label>
+                    <input type="checkbox" class="form-check-input" @bind="_disability"/>
+                </div>
+        <button class="btn btn-primary" @onclick="AddVolunteer">Добавить</button>
+    </form>
+</div>
+
 @code {
-    
+    private string _firstName;
+    private string _surName;
+    private string? _partonymic;
+    private DateTime _birthDay;
+    private string? _vk;
+    private bool _disability;
+    private int _clothingSize;
+
+    private void AddVolunteer()
+    {
+        var volunteer = new Volunteer()
+        {
+            FirstName = _firstName,
+            SurName = _surName,
+            Patronymic = _partonymic,
+            BirthDay = _birthDay,
+            VK = _vk,
+            Disability = _disability,
+            ClothingSize = _clothingSize
+        };
+        // Добавление волонтера
+        VolunteerService.AddVolunteer(volunteer);
+    }
 }

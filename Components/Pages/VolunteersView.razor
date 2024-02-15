@@ -31,7 +31,7 @@ else
                 <td>@volunteer.FirstName</td>
                 <td>@volunteer.SurName</td>
                 <td>@volunteer.Patronymic</td>
-                <td>@volunteer.BirthDay</td>
+                <td>@volunteer.BirthDay.ToString("dd/MM/yyyy")</td>
                 <td>@volunteer.VK</td>
                 <td>@(volunteer.Disability ? "Да" : "Нет")</td>
                 <td>@volunteer.ClothingSize</td>

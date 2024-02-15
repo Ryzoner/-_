@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "aeaSEwIBHlYuytkoKUe1UmqAj2+Zyb5TyABfWD9CoxY=",
+  "Hash": "W99+A4Av9YboHq2j90K6jPILEoKAnjNcHCrrd7uaXT8=",
   "Source": "SKIV",
   "BasePath": "_content/SKIV",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "SKIV\\wwwroot",
       "Source": "SKIV",
-      "ContentRoot": "C:\\Users\\vadmi\\RiderProjects\\SKIV\\SKIV\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\user\\RiderProjects\\SKIV-Volunteers\\wwwroot\\",
       "BasePath": "_content/SKIV",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\vadmi\\RiderProjects\\SKIV\\SKIV\\obj\\Debug\\net8.0\\scopedcss\\bundle\\SKIV.styles.css",
+      "Identity": "C:\\Users\\user\\RiderProjects\\SKIV-Volunteers\\obj\\Debug\\net8.0\\scopedcss\\bundle\\SKIV.styles.css",
       "SourceId": "SKIV",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\vadmi\\RiderProjects\\SKIV\\SKIV\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
+      "ContentRoot": "C:\\Users\\user\\RiderProjects\\SKIV-Volunteers\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
       "BasePath": "_content/SKIV",
       "RelativePath": "SKIV.styles.css",
       "AssetKind": "All",
@@ -33,13 +33,13 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\vadmi\\RiderProjects\\SKIV\\SKIV\\obj\\Debug\\net8.0\\scopedcss\\bundle\\SKIV.styles.css"
+      "OriginalItemSpec": "C:\\Users\\user\\RiderProjects\\SKIV-Volunteers\\obj\\Debug\\net8.0\\scopedcss\\bundle\\SKIV.styles.css"
     },
     {
-      "Identity": "C:\\Users\\vadmi\\RiderProjects\\SKIV\\SKIV\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\SKIV.bundle.scp.css",
+      "Identity": "C:\\Users\\user\\RiderProjects\\SKIV-Volunteers\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\SKIV.bundle.scp.css",
       "SourceId": "SKIV",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\vadmi\\RiderProjects\\SKIV\\SKIV\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
+      "ContentRoot": "C:\\Users\\user\\RiderProjects\\SKIV-Volunteers\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
       "BasePath": "_content/SKIV",
       "RelativePath": "SKIV.bundle.scp.css",
       "AssetKind": "All",
@@ -52,13 +52,13 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\vadmi\\RiderProjects\\SKIV\\SKIV\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\SKIV.bundle.scp.css"
+      "OriginalItemSpec": "C:\\Users\\user\\RiderProjects\\SKIV-Volunteers\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\SKIV.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Users\\vadmi\\RiderProjects\\SKIV\\SKIV\\wwwroot\\app.css",
+      "Identity": "C:\\Users\\user\\RiderProjects\\SKIV-Volunteers\\wwwroot\\app.css",
       "SourceId": "SKIV",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\vadmi\\RiderProjects\\SKIV\\SKIV\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\user\\RiderProjects\\SKIV-Volunteers\\wwwroot\\",
       "BasePath": "_content/SKIV",
       "RelativePath": "app.css",
       "AssetKind": "All",
@@ -74,10 +74,10 @@
       "OriginalItemSpec": "wwwroot\\app.css"
     },
     {
-      "Identity": "C:\\Users\\vadmi\\RiderProjects\\SKIV\\SKIV\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "Identity": "C:\\Users\\user\\RiderProjects\\SKIV-Volunteers\\wwwroot\\bootstrap\\bootstrap.min.css",
       "SourceId": "SKIV",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\vadmi\\RiderProjects\\SKIV\\SKIV\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\user\\RiderProjects\\SKIV-Volunteers\\wwwroot\\",
       "BasePath": "_content/SKIV",
       "RelativePath": "bootstrap/bootstrap.min.css",
       "AssetKind": "All",
@@ -93,10 +93,10 @@
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Identity": "C:\\Users\\vadmi\\RiderProjects\\SKIV\\SKIV\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "Identity": "C:\\Users\\user\\RiderProjects\\SKIV-Volunteers\\wwwroot\\bootstrap\\bootstrap.min.css.map",
       "SourceId": "SKIV",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\vadmi\\RiderProjects\\SKIV\\SKIV\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\user\\RiderProjects\\SKIV-Volunteers\\wwwroot\\",
       "BasePath": "_content/SKIV",
       "RelativePath": "bootstrap/bootstrap.min.css.map",
       "AssetKind": "All",
@@ -112,10 +112,10 @@
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Identity": "C:\\Users\\vadmi\\RiderProjects\\SKIV\\SKIV\\wwwroot\\favicon.png",
+      "Identity": "C:\\Users\\user\\RiderProjects\\SKIV-Volunteers\\wwwroot\\favicon.png",
       "SourceId": "SKIV",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\vadmi\\RiderProjects\\SKIV\\SKIV\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\user\\RiderProjects\\SKIV-Volunteers\\wwwroot\\",
       "BasePath": "_content/SKIV",
       "RelativePath": "favicon.png",
       "AssetKind": "All",

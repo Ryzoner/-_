@@ -9,6 +9,7 @@ public class VolunteerService(ApplicationContext dbContext) : IVolunteerService
     public void AddVolunteer(Volunteer volunteer)
     {
         dbContext.Volunteers.Add(volunteer);
+        dbContext.SaveChanges();
     }
 
     public List<Volunteer> GetVolunteers()

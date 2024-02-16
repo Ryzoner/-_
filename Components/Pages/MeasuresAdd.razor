@@ -1,11 +1,8 @@
 ﻿@page "/MeasuresAdd"
 @using SKIV.Components.Models
 @using SKIV.Components.Service
-@using SKIV.Components.DataBase
 @inject MeasureService MeasureService;
 @inject VolunteerService VolunteerService;
-@inject ParticipationService ParticipationService;
-@inject ApplicationContext dbContext;
 @rendermode InteractiveServer
 
 <style>
@@ -153,10 +150,10 @@
             <label>Волонтеры с ограничениями:</label>
             <input type="number" class="form-control" @bind="_volunteersWithDisabilities"/>
         </div>
-            <div class="form-group">
-                <label>Медиа волонтеры:</label>
-                <input type="number" class="form-control" @bind="_mediaVolunteers"/>
-            </div>
+        <div class="form-group">
+            <label>Медиа волонтеры:</label>
+            <input type="number" class="form-control" @bind="_mediaVolunteers"/>
+        </div>
         <div class="form-group">
             <label>Добро.ру (ссылка на сайт):</label>
             <input type="url" class="form-control" @bind="_dobroRu"/>
@@ -170,7 +167,7 @@
             <input type="checkbox" class="form-check-input" @bind="_lr"/>
         </div>
         <div class="button-container">
-             <button class="btn btn-primary" @onclick="AddMeasure">Добавить</button>
+            <button class="btn btn-primary" @onclick="AddMeasure">Добавить</button>
         </div>
     </form>
 
@@ -180,19 +177,20 @@
             @foreach (var volunteerData in GetVolunteersOnCurrentPage())
             {
                 <div class="checkbox-container">
-                    <input type="checkbox" @bind="volunteerData.IsSelected" />
+                    <input type="checkbox" @bind="volunteerData.IsSelected"/>
                     <label>@volunteerData.Volunteer.SurName @volunteerData.Volunteer.FirstName</label>
-                    <input type="number" min="0" max="5" @bind="volunteerData.Rating" class="form-control rating-input" placeholder="Оценка" />
+                    <input type="number" min="0" max="5" @bind="volunteerData.Rating" class="form-control rating-input" placeholder="Оценка"/>
                 </div>
             }
             <div>
-                <button @onclick="(() => ChangePage(-1))" disabled="@IsFirstPage">Previous</button>
+                <button @onclick="() => ChangePage(-1)" disabled="@IsFirstPage">Previous</button>
                 <span>Page @currentPage</span>
-                <button @onclick="(() => ChangePage(1))" disabled="@IsLastPage">Next</button>
+                <button @onclick="() => ChangePage(1)" disabled="@IsLastPage">Next</button>
             </div>
         </form>
     </div>
 </div>
+
 @code {
 
     // Класс для представления волонтера с выбранным статусом и оценкой
@@ -202,11 +200,12 @@
         public bool IsSelected { get; set; }
         public int Rating { get; set; }
     }
+
     private string _searchQuery = "";
     private int _selectedRating = 1;
-    private List<VolunteerData> _filteredVolunteers = new List<VolunteerData>();
-    private List<VolunteerData> _volunteerData = new List<VolunteerData>();
-    private List<VolunteerData> _selectedVolunteers = new List<VolunteerData>();
+    private List<VolunteerData> _filteredVolunteers = new();
+    private List<VolunteerData> _volunteerData = new();
+    private List<VolunteerData> _selectedVolunteers = new();
     private List<Volunteer>? _volunteers;
     private string? _measureName;
     private string? _organizer;
@@ -227,10 +226,10 @@
     private bool _lp;
     private bool _lr;
     private int _mediaVolunteers;
+    private bool IsFirstPage => currentPage == 1;
+    private bool IsLastPage => currentPage >= _volunteerData.Count / pageSize + 1;
     private int pageSize = 10; // Количество элементов на странице
     private int currentPage = 1; // Текущая страница
-    private bool IsFirstPage => currentPage == 1;
-    private bool IsLastPage => currentPage >= (_volunteerData.Count / pageSize) + 1;
 
     private void ChangePage(int increment)
     {
@@ -299,6 +298,6 @@
 
         // Очищаем список выбранных волонтеров после добавления мероприятия
         _selectedVolunteers.Clear();
-
     }
+
 }

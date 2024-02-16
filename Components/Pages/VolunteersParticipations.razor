@@ -1,0 +1,139 @@
+﻿@page "/VolunteersParticipations"
+@using SKIV.Components.Models
+@using SKIV.Components.Service
+@inject VolunteerService VolunteerService;
+@inject ParticipationService ParticipationService;
+@inject MeasureService MeasureService;
+@rendermode InteractiveServer
+
+<h3>Выбор волонтеров для мероприятия</h3>
+
+<select class="form-control" @bind="_selectedMeasureId">
+    @foreach (var measure in _measures)
+    {
+        <option value="@measure.IdMeasure">@measure.MeasureName</option>
+    }
+</select>
+
+<div class="search-container">
+    <input type="text" @bind="_searchQuery" placeholder="Поиск волонтеров">
+    <button @onclick="SearchVolunteers">Искать</button>
+</div>
+
+
+    <table class="volunteers-table">
+        <thead>
+            <tr>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Отметить на мероприятии</th>
+                <th>Оценка</th>
+            </tr>
+        </thead>
+<tbody>
+    @if (_selectedVolunteers != null && _selectedVolunteers.Any())
+    {
+        @foreach (var volunteer in _volunteers)
+        {
+            var volunteerData = _selectedVolunteers.FirstOrDefault(v => v.Volunteer.IdVolunteer == volunteer.IdVolunteer);
+            var isSelected = volunteerData?.IsSelected ?? false;
+            var rating = volunteerData?.Rating ?? 1;
+                    
+            <tr>
+                <td>@volunteer.FirstName</td>
+                <td>@volunteer.SurName</td>
+                <td><input type="checkbox" @bind="isSelected" /></td>
+                <td>
+                    <select @bind="rating">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td colspan="4">Нет данных о выбранных волонтерах</td>
+        </tr>
+    }
+</tbody>
+    </table>
+
+
+<button @onclick="SaveParticipations">Сохранить</button>
+
+@code {
+    private string _searchQuery = "";
+    private List<Volunteer> _volunteers;
+    private List<VolunteerData> _filteredVolunteers = new List<VolunteerData>();
+    private List<VolunteerData> _selectedVolunteers = new List<VolunteerData>();
+    private List<Measure> _measures;
+    private int _selectedMeasureId;
+
+    protected override void OnInitialized()
+    {
+        _measures = MeasureService.GetMeasures();
+    }
+
+    private async Task SearchVolunteers()
+    {
+        FilterVolunteers();
+    }
+
+    private void FilterVolunteers()
+    {
+        if (string.IsNullOrWhiteSpace(_searchQuery))
+        {
+            // Проверяем, есть ли выбранные волонтеры при очистке строки поиска
+            // Если есть, сохраняем их оценки
+            if (_filteredVolunteers.Any(v => v.IsSelected))
+            {
+                _selectedVolunteers.AddRange(_filteredVolunteers.Where(v => v.IsSelected));
+            }
+            _filteredVolunteers.Clear();
+            return;
+        }
+
+        // Получение всех волонтеров из базы данных
+        var allVolunteers = VolunteerService.GetVolunteers();
+
+        // Применение фильтра по поисковому запросу
+        _filteredVolunteers = allVolunteers
+            .Where(v => v.FirstName.Contains(_searchQuery, StringComparison.OrdinalIgnoreCase) ||
+                        v.SurName.Contains(_searchQuery, StringComparison.OrdinalIgnoreCase))
+            .Select(v => new VolunteerData
+            {
+                Volunteer = v,
+                IsSelected = false
+            })
+            .ToList();
+
+        // Принудительное обновление компонента после фильтрации
+        StateHasChanged();
+    }
+
+    private void SaveParticipations()
+    {
+        // Сохранение информации о участии волонтеров на мероприятии и их оценках
+        foreach (var volunteerData in _selectedVolunteers)
+        {
+            if (volunteerData.IsSelected)
+            {
+                // Добавьте сохранение участия в базу данных здесь
+            }
+        }
+    }
+
+    // Класс для представления волонтера с выбранным статусом и оценкой
+    public class VolunteerData
+    {
+        public Volunteer Volunteer { get; set; }
+        public bool IsSelected { get; set; }
+        public int Rating { get; set; }
+    }
+}

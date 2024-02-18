@@ -3,22 +3,11 @@ using SKIV.Components.Models;
 
 namespace SKIV.Components.Service;
 
-public class ParticipationService
+public class ParticipationService(ApplicationContext dbContext)
 {
-    private static ApplicationContext _dbContext = null!;
-
-    public ParticipationService(ApplicationContext context)
+    public void AddParticipation(Participation participation)
     {
-        _dbContext = context;
-    }
-    public static void AddParticipation(Participation participation)
-    {
-        if (participation == null)
-        {
-            throw new ArgumentNullException(nameof(participation));
-        }
-
-        _dbContext.Participations.Add(participation);
-        _dbContext.SaveChanges();
+        dbContext.Participations.Add(participation);
+        dbContext.SaveChanges();
     }
 }

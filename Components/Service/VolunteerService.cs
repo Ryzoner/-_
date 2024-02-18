@@ -24,18 +24,4 @@ public class VolunteerService(ApplicationContext dbContext) : IVolunteerService
             .Sum(p => (int?)p.Score) ?? 0;
         return totalRating;
     }
-    
-    public List<Volunteer> SearchVolunteers(string searchQuery)
-    {
-        // Приводим строку поиска к нижнему регистру для сравнения без учета регистра
-        string query = searchQuery.ToLower();
-
-        // Выполняем запрос к базе данных, чтобы найти волонтеров, у которых имя или фамилия содержат поисковую строку
-        var volunteers = dbContext.Volunteers
-            .Where(v => v.FirstName.Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
-                        v.SurName.Contains(query, StringComparison.CurrentCultureIgnoreCase))
-            .ToList();
-
-        return volunteers;
-    }
 }

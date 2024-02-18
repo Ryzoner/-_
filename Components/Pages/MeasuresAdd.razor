@@ -3,6 +3,7 @@
 @using SKIV.Components.Service
 @inject MeasureService MeasureService;
 @inject VolunteerService VolunteerService;
+@inject ParticipationService ParticipationService;
 @rendermode InteractiveServer
 
 <style>
@@ -179,12 +180,12 @@
                 <div class="checkbox-container">
                     <input type="checkbox" @bind="volunteerData.IsSelected"/>
                     <label>@volunteerData.Volunteer.SurName @volunteerData.Volunteer.FirstName</label>
-                    <input type="number" min="0" max="5" @bind="volunteerData.Rating" class="form-control rating-input" placeholder="Оценка"/>
+                    <input type="number" min="0" max="5" @bind="volunteerData.Rating" placeholder="Оценка"/>
                 </div>
             }
             <div>
                 <button @onclick="() => ChangePage(-1)" disabled="@IsFirstPage">Previous</button>
-                <span>Page @currentPage</span>
+                <span>Page @_currentPage</span>
                 <button @onclick="() => ChangePage(1)" disabled="@IsLastPage">Next</button>
             </div>
         </form>
@@ -192,7 +193,6 @@
 </div>
 
 @code {
-
     // Класс для представления волонтера с выбранным статусом и оценкой
     private class VolunteerData
     {
@@ -200,10 +200,8 @@
         public bool IsSelected { get; set; }
         public int Rating { get; set; }
     }
-
     private string _searchQuery = "";
     private int _selectedRating = 1;
-    private List<VolunteerData> _filteredVolunteers = new();
     private List<VolunteerData> _volunteerData = new();
     private List<VolunteerData> _selectedVolunteers = new();
     private List<Volunteer>? _volunteers;
@@ -226,19 +224,19 @@
     private bool _lp;
     private bool _lr;
     private int _mediaVolunteers;
-    private bool IsFirstPage => currentPage == 1;
-    private bool IsLastPage => currentPage >= _volunteerData.Count / pageSize + 1;
-    private int pageSize = 10; // Количество элементов на странице
-    private int currentPage = 1; // Текущая страница
+    private bool IsFirstPage => _currentPage == 1;
+    private bool IsLastPage => _currentPage >= _volunteerData.Count / _pageSize + 1;
+    private int _pageSize = 10; // Количество элементов на странице
+    private int _currentPage = 1; // Текущая страница
 
     private void ChangePage(int increment)
     {
-        currentPage += increment;
+        _currentPage += increment;
     }
 
     private List<VolunteerData> GetVolunteersOnCurrentPage()
     {
-        return _volunteerData.Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+        return _volunteerData.Skip((_currentPage - 1) * _pageSize).Take(_pageSize).ToList();
     }
 
     protected override void OnInitialized()
@@ -285,19 +283,17 @@
         MeasureService.AddMeasure(measure);
 
         // Добавление участников (волонтеров) и их оценок в базу данных
-        foreach (var volunteerData in _selectedVolunteers)
+        foreach (var participation in from volunteerData in _volunteerData where volunteerData.IsSelected select new Participation
+                 {
+                     Measure = measure,
+                     Volunteer = volunteerData.Volunteer,
+                     Score = volunteerData.Rating
+                 })
         {
-            var participation = new Participation
-            {
-                Measure = measure,
-                Volunteer = volunteerData.Volunteer,
-                Score = volunteerData.Rating
-            };
             ParticipationService.AddParticipation(participation);
         }
 
         // Очищаем список выбранных волонтеров после добавления мероприятия
         _selectedVolunteers.Clear();
     }
-
 }

@@ -2,8 +2,39 @@
 @using SKIV.Components.Models
 @using SKIV.Components.Service
 @inject VolunteerService VolunteerService;
-<h3>VolunteerAdd</h3>
 @rendermode InteractiveServer
+
+<style>
+    /* Общие стили */
+    .container {
+        align-items: center;
+    }
+    
+    .form-container {
+        width: 50%;
+        margin-right: 20px;
+    }
+        
+    /* Стили для форм ввода */
+    .form-group {
+        margin-bottom: 20px;
+    }
+    
+    .form-control {
+        width: calc(100% - 10px);
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        transition: border-color 0.3s;
+    }
+    
+    .form-control:focus {
+        border-color: #007bff;
+        outline: none;
+    }
+</style>
+
+<h3>Добавление волонтеров</h3>
 
 <div class="container">
     <form class="form-container">

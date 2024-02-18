@@ -5,7 +5,35 @@
 @inject MeasureService MeasureService;
 @rendermode InteractiveServer
 
-<h3>Measures</h3>
+<style>
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .table th, .table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    .table th {
+        background-color: #f2f2f2;
+    }
+
+    .table tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .table tbody tr:hover {
+        background-color: #f2f2f2;
+    }
+</style>
+
+<h3>Мероприятия</h3>
 
 @if (_measures.Count == 0)
 {
@@ -16,52 +44,50 @@ else
     <table class="table">
         <thead>
         <tr>
-            <th>Id</th>
-            <th>Measure Name</th>
-            <th>Organizer</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-            <th>Start Time</th>
-            <th>End Time</th>
-            <th>Place</th>
-            <th>Address</th>
-            <th>Total Participants</th>
-            <th>Participants With Dosabilities</th>
-            <th>Contact Full Name</th>
-            <th>Contact Phone Number</th>
-            <th>Contact Email</th>
-            <th>Total Volunteers</th>
-            <th>Volunteers With Disabilities</th>
+            <th>Название меропрития</th>
+            <th>Организатор</th>
+            <th>Дата начала</th>
+            <th>Дата окончания</th>
+            <th>Время начала</th>
+            <th>Время окончания</th>
+            <th>ФИО контактного лица</th>
+            <th>Телефон контактного лица</th>
+            <th>Почта контактного лица</th>
+            <th>Место</th>
+            <th>Адрес</th>
+            <th>Кол-во участников</th>
+            <th>Кол-во участников с ОВЗ</th>
+            <th>Кол-во волонтеров</th>
+            <th>Кол-во волонтеров с ОВЗ</th>
             <th>Медиа Волонтеры</th>
-            <th>DobroRu</th>
-            <th>LP</th>
-            <th>LR</th>
+            <th>Добро.ру</th>
+            <th>Официальное письмо</th>
+            <th>Листы регистрации</th>
         </tr>
         </thead>
         <tbody>
             @foreach (var measure in _measures)
             {
                 <tr>
-                    <td>@measure.IdMeasure</td>
                     <td>@measure.MeasureName</td>
                     <td>@measure.Organizer</td>
                     <td>@measure.StartDate.ToString("dd/MM/yyyy")</td>
                     <td>@measure.EndDate.ToString("dd/MM/yyyy")</td>
                     <td>@measure.StartTime</td>
                     <td>@measure.EndTime</td>
+                    <td>@(measure.ContactFullName ?? "-")</td>
+                    <td>@(measure.ContactPhoneNumber != null ? measure.ContactPhoneNumber.ToString() : "-")</td>
+                    <td>@(measure.ContactEmail ?? "-")</td>
                     <td>@measure.Place</td>
                     <td>@measure.Address</td>
                     <td>@measure.TotalParticipants</td>
                     <td>@measure.ParticipantsWithDisabilities</td>
-                    <td>@measure.ContactFullName</td>
-                    <td>@(measure.ContactPhoneNumber != null ? measure.ContactPhoneNumber.ToString() : "")</td>
-                    <td>@measure.ContactEmail</td>
                     <td>@measure.TotalVolunteers</td>
                     <td>@measure.VolunteersWithDisabilities</td>
                     <td>@measure.MediaVolunteers</td>
                     <td>@measure.DobroRu</td>
-                    <td>@(measure.LP ? "Yes" : "No")</td>
-                    <td>@(measure.LR ? "Yes" : "No")</td>
+                    <td>@(measure.LP ? "Да" : "Нет")</td>
+                    <td>@(measure.LR ? "Да" : "Нет")</td>
                 </tr>
             }
         </tbody>

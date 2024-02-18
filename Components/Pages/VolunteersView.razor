@@ -2,8 +2,42 @@
 @using SKIV.Components.Models
 @using SKIV.Components.Service
 @inject VolunteerService VolunteerService;
-<h3>Volunteer</h3>
 @rendermode InteractiveServer
+
+<style>
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .table th, .table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    .table th {
+        background-color: #f2f2f2;
+        cursor: pointer; /* Добавляем курсор-указатель для элементов заголовка */
+    }
+
+    .table th:hover {
+        background-color: #e6e6e6; /* Изменяем цвет фона при наведении курсора */
+    }
+
+    .table tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .table tbody tr:hover {
+        background-color: #f2f2f2;
+    }
+</style>
+
+<h3>Volunteer</h3>
 
 @if (_volunteers.Count == 0)
 {
@@ -14,22 +48,22 @@ else
     <table class="table">
         <thead>
         <tr>
+            <th @onclick="SortBySurName">Фамилия</th>
             <th>Имя</th>
-            <th>Фамилия</th>
             <th>Отчество</th>
             <th>Дата рождения</th>
             <th>VK</th>
             <th>Инвалидность</th>
             <th>Размер одежды</th>
-            <th>Рейтинг</th>
+            <th @onclick="SortByRating">Рейтинг</th>
         </tr>
         </thead>
         <tbody>
         @foreach (var volunteer in _volunteers)
         {
             <tr>
-                <td>@volunteer.FirstName</td>
                 <td>@volunteer.SurName</td>
+                <td>@volunteer.FirstName</td>
                 <td>@volunteer.Patronymic</td>
                 <td>@volunteer.BirthDay.ToString("dd/MM/yyyy")</td>
                 <td>@volunteer.VK</td>
@@ -44,9 +78,38 @@ else
 
 @code {
     private List<Volunteer>? _volunteers { get; set; }
+    private bool _ascendingOrder = true;
 
     protected override void OnInitialized()
     {
         _volunteers = VolunteerService.GetVolunteers();
+    }
+
+    private void SortByRating()
+    {
+        if (_ascendingOrder)
+        {
+            _volunteers = _volunteers.OrderBy(v => VolunteerService.CalculateTotalRating(v.IdVolunteer)).ToList();
+        }
+        else
+        {
+            _volunteers = _volunteers.OrderByDescending(v => VolunteerService.CalculateTotalRating(v.IdVolunteer)).ToList();
+        }
+
+        _ascendingOrder = !_ascendingOrder;
+    }
+    
+    private void SortBySurName()
+    {
+        if (_ascendingOrder)
+        {
+            _volunteers = _volunteers.OrderBy(v => v.SurName).ToList();
+        }
+        else
+        {
+            _volunteers = _volunteers.OrderByDescending(v => v.SurName).ToList();
+        }
+
+        _ascendingOrder = !_ascendingOrder;
     }
 }

@@ -3,6 +3,7 @@
 @using SKIV.Components.Service
 @using SKIV.Components.DataBase
 @inject MeasureService MeasureService;
+@inject NavigationManager NavigationManager;
 @rendermode InteractiveServer
 
 <style>
@@ -37,7 +38,7 @@
 
 @if (_measures.Count == 0)
 {
-    <p>No measures found.</p>
+    <p>В базе данных нет мероприятий.</p>
 }
 else
 {

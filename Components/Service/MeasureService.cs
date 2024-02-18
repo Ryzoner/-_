@@ -16,4 +16,13 @@ public class MeasureService(ApplicationContext dbContext) : IMeasureService
     {
         return dbContext.Measures.ToList();
     }
+    
+    public List<Measure> GetRecentMeasures(int count)
+    {
+        // Запрос к базе данных для получения последних 'count' мероприятий, отсортированных по дате начала
+        return dbContext.Measures
+            .OrderByDescending(m => m.StartDate)
+            .Take(count)
+            .ToList();
+    }
 }

@@ -1,0 +1,12 @@
+﻿# Rider
+.idea/
+
+# .NET
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.log
+*.vscode
+*.vs
